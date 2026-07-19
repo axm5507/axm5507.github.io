@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portfolio — Game Boy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav class="sidebar">
+  <div class="sidebar-header">
+    <h1>Your Name</h1>
+    <p>Software Engineer</p>
+  </div>
+
+  <ul class="nav-links">
+    <li><a href="resume.pdf" target="_blank" rel="noopener noreferrer">Résumé</a></li>
+    <li><a href="https://github.com/axm5507" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+    <li><a href="https://www.linkedin.com/in/arjun-manikandan-647742288/" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+    <li><a href="mailto:axm5507@gmail.com">Contact</a></li>
+  </ul>
+
+  <div class="sidebar-footer">
+    <p class="hint">Arrows move · Z = A · X = B · Enter = Start<br>Select = emulator internals</p>
+  </div>
+</nav>
+
+<main class="stage">
+  <div class="screen-wrap" id="screen-wrap">
+    <canvas id="screen" width="160" height="144"></canvas>
+
+    <div class="overlay" id="overlay">
+      <div class="overlay-section">
+        <div class="overlay-row"><span>AF</span><span id="ov-af">0000</span></div>
+        <div class="overlay-row"><span>BC</span><span id="ov-bc">0000</span></div>
+        <div class="overlay-row"><span>DE</span><span id="ov-de">0000</span></div>
+        <div class="overlay-row"><span>HL</span><span id="ov-hl">0000</span></div>
+        <div class="overlay-row"><span>SP</span><span id="ov-sp">0000</span></div>
+        <div class="overlay-row"><span>PC</span><span id="ov-pc">0000</span></div>
+      </div>
+      <div class="overlay-section">
+        <div class="overlay-row"><span>Flags</span><span id="ov-flags">----</span></div>
+        <div class="overlay-row"><span>IME</span><span id="ov-ime">off</span></div>
+        <div class="overlay-row"><span>Halted</span><span id="ov-halted">no</span></div>
+      </div>
+      <div class="overlay-section">
+        <div class="overlay-row"><span>FPS</span><span id="ov-fps">0.0</span></div>
+        <div class="overlay-row"><span>Cycles</span><span id="ov-cycles">0</span></div>
+      </div>
+    </div>
+
+    <button id="overlay-toggle" class="overlay-toggle" title="Toggle emulator internals (Select)">&#9432;</button>
+  </div>
+
+  <p class="rom-status" id="rom-status"></p>
+</main>
+
+<script type="module" src="main.js"></script>
+</body>
+</html>

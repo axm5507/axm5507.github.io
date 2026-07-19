@@ -1,0 +1,227 @@
+:root {
+  --bg: #14151a;
+  --panel: #1c1e26;
+  --border: #2c2f3a;
+  --text: #e8e9ed;
+  --muted: #8b8fa3;
+  --accent: #7dd3a8;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  display: flex;
+  min-height: 100vh;
+  background: var(--bg);
+  color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+/* ---- Sidebar ---- */
+/* Deliberately pure black/white/grey (no accent color) with a pixel-art
+   arcade font, styled like a Game Boy menu: a ">" cursor marks the
+   hovered/focused item instead of a color change. */
+
+.sidebar {
+  --px-white: #fff;
+  --px-black: #000;
+  --px-grey: #8a8a8a;
+  width: 280px;
+  flex-shrink: 0;
+  background: var(--px-black);
+  color: var(--px-white);
+  border-right: 4px solid var(--px-white);
+  padding: 28px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  font-family: "Press Start 2P", "Courier New", monospace;
+}
+
+.sidebar-header h1 {
+  font-size: 0.85rem;
+  font-weight: normal;
+  line-height: 1.6;
+  margin: 0 0 10px;
+  text-transform: uppercase;
+}
+
+.sidebar-header p {
+  margin: 0;
+  color: var(--px-grey);
+  font-size: 0.6rem;
+  line-height: 1.6;
+}
+
+.nav-links {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.nav-links a {
+  display: block;
+  padding: 10px 10px 10px 22px;
+  position: relative;
+  color: var(--px-white);
+  text-decoration: none;
+  text-transform: uppercase;
+  font-size: 0.65rem;
+  line-height: 1.4;
+  border: 2px solid transparent;
+}
+
+.nav-links a::before {
+  content: ">";
+  position: absolute;
+  left: 4px;
+  opacity: 0;
+}
+
+.nav-links a:hover,
+.nav-links a:focus-visible {
+  border-color: var(--px-white);
+  outline: none;
+}
+
+.nav-links a:hover::before,
+.nav-links a:focus-visible::before {
+  opacity: 1;
+}
+
+.sidebar-footer {
+  margin-top: auto;
+  font-size: 0.55rem;
+  color: var(--px-grey);
+  line-height: 1.8;
+}
+
+.sidebar-footer .hint {
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 2px dashed var(--px-grey);
+  color: var(--px-white);
+}
+
+/* ---- Stage ---- */
+
+.stage {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  padding: 24px;
+}
+
+.screen-wrap {
+  position: relative;
+  border: 3px solid var(--border);
+  border-radius: 10px;
+  background: #000;
+  line-height: 0;
+}
+
+#screen {
+  width: 640px;
+  height: 576px;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+  display: block;
+  border-radius: 7px;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 14px;
+  padding: 24px;
+  background: rgba(10, 11, 15, 0.82);
+  color: var(--accent);
+  font-family: "SF Mono", "Cascadia Code", Consolas, monospace;
+  font-size: 0.95rem;
+  line-height: normal;
+  border-radius: 7px;
+}
+
+.overlay.visible {
+  display: flex;
+}
+
+.overlay-section {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.overlay-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.overlay-row span:first-child {
+  color: var(--muted);
+}
+
+.overlay-toggle {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: rgba(0, 0, 0, 0.5);
+  color: var(--muted);
+  cursor: pointer;
+  font-size: 0.9rem;
+  line-height: 1;
+}
+
+.overlay-toggle:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+.rom-status {
+  color: var(--muted);
+  font-size: 0.8rem;
+  margin: 0;
+}
+
+@media (max-width: 760px) {
+  body {
+    flex-direction: column;
+  }
+  .sidebar {
+    width: 100%;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    padding: 16px;
+    border-right: none;
+    border-bottom: 4px solid var(--px-white);
+  }
+  .sidebar-footer {
+    display: none;
+  }
+  #screen {
+    width: min(90vw, 480px);
+    height: calc(min(90vw, 480px) * 0.9);
+  }
+}

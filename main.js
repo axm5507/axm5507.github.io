@@ -5,7 +5,7 @@ const SCREEN_HEIGHT = 144;
 const ROM_PATH = 'roms/portfolio.gb';
 
 // Keyboard -> Game Boy button codes, matching button_from_code() in src/web.rs.
-// Select (Right Shift) is deliberately absent here: it's intercepted at the page
+// Select (Shift) is deliberately absent here: it's intercepted at the page
 // level to toggle the debug overlay and never reaches the emulator's joypad.
 const KEY_CODES = {
   ArrowRight: 0,
@@ -54,7 +54,7 @@ function toggleOverlay() {
 }
 
 function onKeyDown(event) {
-  if (event.code === 'ShiftRight') {
+  if (event.code === 'ShiftRight' || event.code === 'ShiftLeft') {
     event.preventDefault();
     if (!event.repeat) toggleOverlay();
     return;

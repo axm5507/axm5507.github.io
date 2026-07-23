@@ -9,13 +9,23 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
+<script>
+  // Applied before first paint so a stored preference doesn't flash the
+  // wrong theme for a frame. Mirrors the toggle logic in main.ts.
+  if (localStorage.getItem('theme') === 'light') {
+    document.documentElement.classList.add('light');
+  }
+</script>
 </head>
 <body>
 
 <nav class="sidebar">
   <div class="sidebar-header">
-    <h1>Arjun Manikandan</h1>
-    <p>Software Engineer</p>
+    <div>
+      <h1>Arjun Manikandan</h1>
+      <p>Software Engineer</p>
+    </div>
+    <button type="button" id="theme-toggle" aria-label="Toggle light/dark mode"></button>
   </div>
 
   <ul class="nav-links">
@@ -35,30 +45,72 @@
 </nav>
 
 <main class="stage">
-  <div class="screen-wrap" id="screen-wrap">
-    <canvas id="screen" width="160" height="144"></canvas>
+  <div class="console">
+    <div class="console-top">
+      <div class="power-row">
+        <span class="power-led"></span>
+        <span class="power-label">POWER</span>
+        <span class="brand">Arjun&trade;</span>
+      </div>
 
-    <div class="overlay" id="overlay">
-      <div class="overlay-section">
-        <div class="overlay-row"><span>AF</span><span id="ov-af">0000</span></div>
-        <div class="overlay-row"><span>BC</span><span id="ov-bc">0000</span></div>
-        <div class="overlay-row"><span>DE</span><span id="ov-de">0000</span></div>
-        <div class="overlay-row"><span>HL</span><span id="ov-hl">0000</span></div>
-        <div class="overlay-row"><span>SP</span><span id="ov-sp">0000</span></div>
-        <div class="overlay-row"><span>PC</span><span id="ov-pc">0000</span></div>
-      </div>
-      <div class="overlay-section">
-        <div class="overlay-row"><span>Flags</span><span id="ov-flags">----</span></div>
-        <div class="overlay-row"><span>IME</span><span id="ov-ime">off</span></div>
-        <div class="overlay-row"><span>Halted</span><span id="ov-halted">no</span></div>
-      </div>
-      <div class="overlay-section">
-        <div class="overlay-row"><span>FPS</span><span id="ov-fps">0.0</span></div>
-        <div class="overlay-row"><span>Cycles</span><span id="ov-cycles">0</span></div>
+      <div class="screen-bezel">
+        <div class="screen-wrap" id="screen-wrap">
+          <canvas id="screen" width="160" height="144"></canvas>
+
+          <div class="overlay" id="overlay">
+            <div class="overlay-section">
+              <div class="overlay-row"><span>AF</span><span id="ov-af">0000</span></div>
+              <div class="overlay-row"><span>BC</span><span id="ov-bc">0000</span></div>
+              <div class="overlay-row"><span>DE</span><span id="ov-de">0000</span></div>
+              <div class="overlay-row"><span>HL</span><span id="ov-hl">0000</span></div>
+              <div class="overlay-row"><span>SP</span><span id="ov-sp">0000</span></div>
+              <div class="overlay-row"><span>PC</span><span id="ov-pc">0000</span></div>
+            </div>
+            <div class="overlay-section">
+              <div class="overlay-row"><span>Flags</span><span id="ov-flags">----</span></div>
+              <div class="overlay-row"><span>IME</span><span id="ov-ime">off</span></div>
+              <div class="overlay-row"><span>Halted</span><span id="ov-halted">no</span></div>
+            </div>
+            <div class="overlay-section">
+              <div class="overlay-row"><span>FPS</span><span id="ov-fps">0.0</span></div>
+              <div class="overlay-row"><span>Cycles</span><span id="ov-cycles">0</span></div>
+            </div>
+          </div>
+
+          <button id="overlay-toggle" class="overlay-toggle" title="Toggle emulator internals (Select)">&#9432;</button>
+        </div>
       </div>
     </div>
 
-    <button id="overlay-toggle" class="overlay-toggle" title="Toggle emulator internals (Select)">&#9432;</button>
+    <div class="console-bottom">
+      <div class="controls-row">
+        <div class="dpad">
+          <button class="dpad-btn up" data-code="2" aria-label="Up"></button>
+          <button class="dpad-btn down" data-code="3" aria-label="Down"></button>
+          <button class="dpad-btn left" data-code="1" aria-label="Left"></button>
+          <button class="dpad-btn right" data-code="0" aria-label="Right"></button>
+          <div class="dpad-hub"></div>
+        </div>
+
+        <div class="ab-buttons">
+          <button class="round-btn b" data-code="5" aria-label="B">B</button>
+          <button class="round-btn a" data-code="4" aria-label="A">A</button>
+        </div>
+      </div>
+
+      <div class="start-select">
+        <span class="pill">
+          <button id="btn-select" class="pill-btn" aria-label="Select (toggles emulator internals)"></button>
+          <span class="pill-label">SELECT</span>
+        </span>
+        <span class="pill">
+          <button class="pill-btn" data-code="6" aria-label="Start"></button>
+          <span class="pill-label">START</span>
+        </span>
+      </div>
+
+      <div class="speaker-grille"></div>
+    </div>
   </div>
 
   <p class="rom-status" id="rom-status"></p>

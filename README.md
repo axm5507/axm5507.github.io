@@ -13,7 +13,7 @@ Pages can serve it as-is with nothing but "Deploy from branch" turned on.
 The actual source — the Rust emulator core, the wasm bindings, and the front-end
 source these files are built from — lives in
 [axm5507/gameboy-emulator](https://github.com/axm5507/gameboy-emulator), under
-its `web/` directory. The Game Boy ROM itself (`roms/portfolio.gb`) is authored in
+its `web/` directory. The Game Boy ROM itself (`roms/newgame.gb`) is authored in
 GB Studio; see that repo's `GBSTUDIO.md`.
 
 ## Updating the live site
@@ -31,7 +31,7 @@ Then copy the rebuilt output over here and push:
 ```sh
 cp ../gameboy-emulator/web/index.html ../gameboy-emulator/web/style.css ../gameboy-emulator/web/main.js .
 cp ../gameboy-emulator/web/pkg/emulator_core.js ../gameboy-emulator/web/pkg/emulator_core_bg.wasm ../gameboy-emulator/web/pkg/*.d.ts pkg/
-cp ../gameboy-emulator/web/roms/portfolio.gb roms/
+cp ../gameboy-emulator/web/roms/newgame.gb roms/
 git add -A
 git commit -m "Update site"
 git push
